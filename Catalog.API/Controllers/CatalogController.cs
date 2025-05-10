@@ -1,6 +1,5 @@
 using Catalog.API.Entities;
 using Catalog.API.Repositories;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Catalog.API.Controllers;
@@ -27,7 +26,7 @@ public class CatalogController : ControllerBase
 
     [HttpGet("{id:length(24)}", Name = "GetProduct")]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(typeof(Product), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(Product), StatusCodes.Status200OK)]
     public async Task<ActionResult<Product>> GetProductById(string id)
     {
         var product = await _repository.GetProduct(id);
@@ -50,6 +49,43 @@ public class CatalogController : ControllerBase
         var products = await _repository.GetProductByCategory(category);
 
         return Ok(products);
-
     }
+
+    [HttpPost]
+    [ProducesResponseType(typeof(Product), StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Product>> CreateProduct([FromBody] Product product)
+    {
+        if (product is null) return BadRequest("Invalid product");
+
+        await _repository.CreateProduct(product);
+
+        return CreatedAtRoute("GetProduct", new { id = product.Id}, product);
+    
+    }
+
+    [HttpPut]
+    [ProducesResponseType(typeof(Product), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> UpdateProduct([FromBody] Product product)
+    {
+        if (product is null) return BadRequest("Invalid product");
+
+        return Ok(await _repository.UpdateProduct(product));
+    }
+
+    [HttpDelete("{id:length(24)}", Name = "DeleteProduct")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> DeleteProductById(string id)
+    {   
+        var result = await _repository.DeleteProduct(id);
+
+    if (!result)
+    {
+        return BadRequest("failed to delete de product or product not found.");
+    }
+        return NoContent();
+    }
+
 }
