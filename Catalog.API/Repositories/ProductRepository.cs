@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using Catalog.API.Data;
 using Catalog.API.Entities;
 using MongoDB.Driver;
@@ -9,11 +8,12 @@ public class ProductRepository : IProductRepository
 {   
 
     private readonly ICatalogContext _context;
-    
-    private ProductRepository(ICatalogContext context)
+
+    public ProductRepository(ICatalogContext context)
     {
         _context = context;
     }
+
     public async Task CreateProduct(Product product)
     {
         await _context.Products.InsertOneAsync(product);

@@ -38,7 +38,7 @@ public class CatalogController : ControllerBase
     }
 
 
-    [Route("[action/{category}], Name = GetProductByCategory")]
+    [Route("GetProductByCategory/{category}", Name = "GetProductByCategory")]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Product>))]
