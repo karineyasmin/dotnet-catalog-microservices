@@ -1,10 +1,12 @@
 using Catalog.API.Entities;
 using Catalog.API.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Driver;
 
 namespace Catalog.API.Controllers;
 
 [Route("api/[controller]")]
+[Produces("application/json")]
 [ApiController]
 public class CatalogController : ControllerBase
 {
@@ -44,10 +46,12 @@ public class CatalogController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Product>))]
     public async Task<ActionResult<IEnumerable<Product>>> GetProductByCategory(string category)
     {
-        if (category is null) return BadRequest("Invalid category");
+        var filter = Builders<Product>.Filter.Regex(
+            p => p.Category,
+            new MongoDB.Bson.BsonRegularExpression(category, "i")
+        );
 
         var products = await _repository.GetProductByCategory(category);
-
         return Ok(products);
     }
 

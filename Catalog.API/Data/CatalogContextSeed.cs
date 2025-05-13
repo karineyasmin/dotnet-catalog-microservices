@@ -25,7 +25,7 @@ public class CatalogContextSeed
                 Description = "Lorem ipsum dolor sit amet. Ea eaque voluptatum sit dolorem ratione sit vitae velit et corrupti rerum et esse iusto. Est molestias perferendis est temporibus aspernatur qui galisum facilis ea doloribus omnis id labore voluptatem qui cumque excepturi.",
                 Image = "product1.png",
                 Price = 950.00M,
-                Category = "SmartPhone"
+                Category = "Smartphone"
             },
             new Product()
             {
@@ -34,12 +34,12 @@ public class CatalogContextSeed
                 Description = "A high-end smartphone with a sleek design, powerful performance, and advanced camera features.",
                 Image = "product2.png",
                 Price = 850.00M,
-                Category = "SmartPhone"
+                Category = "Smartphone"
             },
             new Product()
             {
                 Id = "602d2149e773f2a3990b47f7",
-                Name = "MacBook Pro 16\"",
+                Name = "MacBook Pro 16",
                 Description = "A powerful laptop designed for professionals, featuring a stunning Retina display and M1 chip.",
                 Image = "product3.png",
                 Price = 2500.00M,
