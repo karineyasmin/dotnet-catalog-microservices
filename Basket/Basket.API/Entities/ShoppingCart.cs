@@ -5,16 +5,12 @@ public class ShoppingCart
     public string Username { get; set; }
     public List<ShoppingCartItem> Items { get; set; } = new List<ShoppingCartItem>();
 
-    public ShoppingCar()
-    {
-    }
-
     public ShoppingCart(string username)
     {
         Username = username;
     }
     
-    pubic decimal TotalPrice
+    public decimal TotalPrice
     {
         get
         {
