@@ -9,13 +9,13 @@ services:
     image: ${DOCKER_REGISTRY-}catalogapi
     build:
       context: .
-      dockerfile: Catalog/Catalog.API/Dockerfile
+      dockerfile: Catalog.API/Dockerfile
       
   basketapi:
     image: ${DOCKER_REGISTRY-}basketapi
     build:
       context: .
-      dockerfile: Basket/Basket.API/Dockerfile
+      dockerfile: Basket.API/Dockerfile
 
 volumes:
   mongo_data:

@@ -8,10 +8,10 @@ FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG configuration=Release
 WORKDIR /src
 
-COPY ["Basket/Basket.API/Basket.API.csproj", "Basket.API/"]
+COPY ["Basket.API/Basket.API.csproj", "Basket.API/"]
 RUN dotnet restore "Basket.API/Basket.API.csproj"
 
-COPY Basket/Basket.API/. Basket.API/
+COPY Basket.API/. Basket.API/
 WORKDIR /src/Basket.API
 
 RUN dotnet build "Basket.API.csproj" -c $configuration -o /app/build

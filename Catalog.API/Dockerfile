@@ -8,10 +8,10 @@ FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG configuration=Release
 WORKDIR /src
 
-COPY ["Catalog/Catalog.API/Catalog.API.csproj", "Catalog.API/"]
+COPY ["Catalog.API/Catalog.API.csproj", "Catalog.API/"]
 RUN dotnet restore "Catalog.API/Catalog.API.csproj"
 
-COPY Catalog/Catalog.API/ ./Catalog.API/
+COPY Catalog.API/ ./Catalog.API/
 WORKDIR /src/Catalog.API
 
 RUN dotnet build "Catalog.API.csproj" -c $configuration -o /app/build
